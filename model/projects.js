@@ -7,6 +7,10 @@ const portfolioSchema = new mongoose.Schema({
   github: "String",
   live: "String",
   image: "String",
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 const Portfolio = mongoose.model("Portfolio", portfolioSchema);
 
