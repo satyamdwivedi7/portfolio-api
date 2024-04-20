@@ -1,7 +1,8 @@
 const Project = require("../model/projects");
 
 module.exports.setPath = (req, res, next) => {
-  req.dir = "public/projects";
+  req.dir = process.cwd()+ "/public/projects";
+  console.log(req.dir);
   next();
 };
 
