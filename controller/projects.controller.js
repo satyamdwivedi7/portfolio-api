@@ -33,11 +33,22 @@ module.exports.createProject = async (req, res) => {
 };
 
 module.exports.getProjects = async (req, res) => {
-  try {
-    const projects = await Project.find();
-    res.status(200).send(projects);
-  } catch (error) {
-    res.status(400).send(error);
+  const {filter} = req.query;
+  if(filter == "all"){
+    try {
+      const projects = await Project.find();
+      res.status(200).send(projects);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }else{
+    try{
+      const projects = await Project.find().limit(4);
+      res.status(200).send(projects);
+    }
+    catch(error){
+      res.status(400).send(error);
+    }
   }
 };
 
