@@ -11,7 +11,7 @@ mongoose
 
 app.listen(3000, () => console.log("Server is running on port 3000..."));
 
-app.use(cors);
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use("/images", express.static(process.cwd() + "/public/projects"));
 app.use("/", routes);
