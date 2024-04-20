@@ -7,7 +7,7 @@ const {
   setPath,
 } = require("./controller/projects.controller");
 const secretMiddleware = require("./middleware/secret.middlleware");
-const uplaoder = require("./middleware/upload.middleware");
+// const uplaoder = require("./middleware/upload.middleware");
 
 const {createSkill, getSkill} = require("./controller/skills.controller");
 
@@ -17,8 +17,8 @@ router.get("/", (req, res) => {
 router.post(
   "/naya-project",
   secretMiddleware,
-  setPath,
-  uplaoder.single("image"),
+  // setPath,
+  // uplaoder.single("image"),
   createProject
 );
 router.get("/projects", getProjects);
