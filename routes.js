@@ -23,11 +23,12 @@ router.get("/skills", getSkill);
 router.post("/sendmail", secretMiddleware, async (req, res) => {
   try {
     const { to } = req.body;
-    await sendMail(to);
+    await sendMail(to).then(() => {
+      console.log("Mail is sent 100%");
+    });
     console.log("Mail sent to:", to);
     res.status(200).json({ message: "Mail sent" });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
 });
-
