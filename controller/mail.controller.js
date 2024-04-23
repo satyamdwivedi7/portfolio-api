@@ -15,7 +15,7 @@ async function mailSender(to, subject, content) {
     from: "Satyam Dwivedi",
     to: to,
     subject: subject,
-    html: content,s
+    html: content,
   });
 }
 
