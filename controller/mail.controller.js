@@ -11,11 +11,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 async function mailSender(to, subject, content) {
-  transporter.sendMail({
+  await transporter.sendMail({
     from: "Satyam Dwivedi",
     to: to,
     subject: subject,
-    html: content,
+    html: content,s
   });
 }
 
