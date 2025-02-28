@@ -15,7 +15,6 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
           If this email is not entended to you please ignore and delete it.
           Thank you.
         </p>
-        <br>
         <p> Regards, <br> Satyam Dwivedi </p>
       </div>
     `;
