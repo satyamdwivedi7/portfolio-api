@@ -25,6 +25,7 @@ module.exports.getCertifications = async (req, res) => {
     const certifications = await Certification.find().sort({ order: 1 });
     res.status(200).send(certifications);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };
