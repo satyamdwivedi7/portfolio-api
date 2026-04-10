@@ -1,7 +1,18 @@
 const mailSender = require("../controller/mail.controller");
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 module.exports.sendMail = async (to, name, messageFromVisitor) => {
-  html = `
+  const safeName = escapeHtml(name);
+  const safeMessage = escapeHtml(messageFromVisitor);
+  const safeTo = escapeHtml(to);
+  const html = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -16,7 +27,7 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
               <!-- Header with Logo -->
               <tr>
                 <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center;">
-                  <img src="https://satyamdwivedi7.github.io/Images/logo.png" alt="Logo" style="max-width: 120px; height: auto; margin-bottom: 20px;">
+                  <img src="https://satyamdwivedi7.github.io/Images/logo.webp" alt="Logo" style="max-width: 120px; height: auto; margin-bottom: 20px;">
                   <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 600;">Thanks for Reaching Out!</h1>
                 </td>
               </tr>
@@ -24,7 +35,7 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
               <!-- Content -->
               <tr>
                 <td style="padding: 40px 30px;">
-                  <h2 style="color: #333333; margin: 0 0 20px 0; font-size: 22px; font-weight: 600;">Hello ${name},</h2>
+                  <h2 style="color: #333333; margin: 0 0 20px 0; font-size: 22px; font-weight: 600;">Hello ${safeName},</h2>
                   
                   <p style="color: #555555; line-height: 1.6; font-size: 16px; margin: 0 0 20px 0;">
                     Thank you for contacting me! I've received your message and I'm excited to connect with you.
@@ -62,7 +73,7 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
     </html>
   `;
   
-  contentToMe = `
+  const contentToMe = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -77,7 +88,7 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
               <!-- Header with Logo -->
               <tr>
                 <td style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 40px 20px; text-align: center;">
-                  <img src="https://satyamdwivedi7.github.io/Images/logo.png" alt="Logo" style="max-width: 120px; height: auto; margin-bottom: 20px;">
+                  <img src="https://satyamdwivedi7.github.io/Images/logo.webp" alt="Logo" style="max-width: 120px; height: auto; margin-bottom: 20px;">
                   <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 600;">🎉 New Visitor Message!</h1>
                 </td>
               </tr>
@@ -109,11 +120,11 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
                     <table width="100%" cellpadding="8" cellspacing="0">
                       <tr>
                         <td style="color: #666666; font-size: 14px; font-weight: 600; width: 120px; vertical-align: top;">Name:</td>
-                        <td style="color: #333333; font-size: 15px;">${name}</td>
+                        <td style="color: #333333; font-size: 15px;">${safeName}</td>
                       </tr>
                       <tr>
                         <td style="color: #666666; font-size: 14px; font-weight: 600; width: 120px; vertical-align: top;">Email:</td>
-                        <td style="color: #667eea; font-size: 15px;"><a href="mailto:${to}" style="color: #667eea; text-decoration: none;">${to}</a></td>
+                        <td style="color: #667eea; font-size: 15px;"><a href="mailto:${safeTo}" style="color: #667eea; text-decoration: none;">${safeTo}</a></td>
                       </tr>
                     </table>
                   </div>
@@ -123,13 +134,13 @@ module.exports.sendMail = async (to, name, messageFromVisitor) => {
                     <h3 style="color: #f5576c; margin: 0 0 15px 0; font-size: 18px; font-weight: 600; border-bottom: 2px solid #f5576c; padding-bottom: 10px;">
                       💬 Message
                     </h3>
-                    <p style="color: #333333; line-height: 1.8; font-size: 15px; margin: 0; white-space: pre-wrap; font-family: 'Courier New', monospace; background-color: #f8f9fa; padding: 15px; border-radius: 4px;">${messageFromVisitor}</p>
+                    <p style="color: #333333; line-height: 1.8; font-size: 15px; margin: 0; white-space: pre-wrap; font-family: 'Courier New', monospace; background-color: #f8f9fa; padding: 15px; border-radius: 4px;">${safeMessage}</p>
                   </div>
                   
                   <!-- Action Button -->
                   <div style="text-align: center; margin: 30px 0;">
-                    <a href="mailto:${to}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; padding: 15px 40px; border-radius: 50px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
-                      Reply to ${name}
+                    <a href="mailto:${safeTo}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; padding: 15px 40px; border-radius: 50px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                      Reply to ${safeName}
                     </a>
                   </div>
                   

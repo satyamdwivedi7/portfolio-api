@@ -5,9 +5,11 @@ module.exports.createSkill = async (req, res) => {
   try {
     let check = await Skill.findOne({ title });
     if (check) {
-      let skill = await Skill.findOneAndUpdate({ title });
-      skill.skillSet.push(...skillSet);
-      await Skill.findOneAndUpdate(skill._id, skill);
+      const skill = await Skill.findOneAndUpdate(
+        { title },
+        { $push: { skillSet: { $each: skillSet } } },
+        { new: true }
+      );
       res.status(201).send(skill);
     } else {
       const skill = new Skill({
@@ -18,7 +20,7 @@ module.exports.createSkill = async (req, res) => {
       res.status(201).send(skill);
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 };

@@ -27,9 +27,9 @@ async function mailSender(to, subject, content, messageFromVisitor) {
       html: messageFromVisitor,
     });
 
-    console.log("Emails sent successfully!");
   } catch (error) {
     console.error("Error sending email:", error);
+    throw error;
   }
 }
 
