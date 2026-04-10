@@ -10,6 +10,11 @@ const secretMiddleware = require("./middleware/secret.middlleware");
 const { createSkill, getSkill } = require("./controller/skills.controller");
 const { sendMail } = require("./mail/mail");
 
+const {
+  createCertification,
+  getCertifications,
+} = require('./controller/certifications.controller');
+
 router.get("/", (req, res) => {
   res.send("API is running successfully");
 });
@@ -29,3 +34,6 @@ router.post("/sendmail", secretMiddleware, async (req, res) => {
     res.status(500).json({ message: e.message });
   }
 });
+
+router.get('/certifications', getCertifications);
+router.post('/new-certification', secretMiddleware, createCertification);
