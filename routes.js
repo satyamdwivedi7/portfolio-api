@@ -13,7 +13,7 @@ const { sendMail } = require("./mail/mail");
 const {
   createCertification,
   getCertifications,
-} = require('./controller/certifications.controller');
+} = require("./controller/certifications.controller");
 
 router.get("/", (req, res) => {
   res.send("API is running successfully");
@@ -35,5 +35,5 @@ router.post("/sendmail", secretMiddleware, async (req, res) => {
   }
 });
 
-router.get('/certifications', getCertifications);
-router.post('/new-certification', secretMiddleware, createCertification);
+router.get("/certifications", getCertifications);
+router.post("/new-certification", secretMiddleware, createCertification);
