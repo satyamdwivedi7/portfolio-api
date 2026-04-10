@@ -15,7 +15,7 @@ module.exports.createCertification = async (req, res) => {
     await certification.save();
     res.status(201).send(certification);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 };
@@ -25,7 +25,7 @@ module.exports.getCertifications = async (req, res) => {
     const certifications = await Certification.find().sort({ order: 1 });
     res.status(200).send(certifications);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(400).send(error);
   }
 };

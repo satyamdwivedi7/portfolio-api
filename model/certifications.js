@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const certificationSchema = new mongoose.Schema({
-  title: 'String',
-  issuer: 'String',
+  title: { type: String, required: true },
+  issuer: { type: String, required: true },
   issuedDate: 'String',
   credentialUrl: 'String',
-  category: 'String',
+  category: { type: String, required: true },
   icon: 'String',
   order: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },

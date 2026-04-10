@@ -20,7 +20,6 @@ router.get("/", (req, res) => {
 });
 router.post("/naya-project", secretMiddleware, createProject);
 router.get("/projects", getProjects);
-module.exports = router;
 
 router.post("/new-skillset", secretMiddleware, createSkill);
 router.get("/skills", getSkill);
@@ -37,3 +36,5 @@ router.post("/sendmail", secretMiddleware, async (req, res) => {
 
 router.get("/certifications", getCertifications);
 router.post("/new-certification", secretMiddleware, createCertification);
+
+module.exports = router;
